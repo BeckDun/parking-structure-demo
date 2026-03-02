@@ -3,7 +3,8 @@ package psms.display;
 import psms.model.SpotStatus;
 
 /**
- * Stall Light - Overhead LED indicator (green/red/blue).
+ * Stall Light (SAD Section 2.3 - Output Device)
+ * Overhead LED indicator: green (available), red (occupied), blue (handicap available).
  */
 public class StallLight {
     private SpotStatus status = SpotStatus.AVAILABLE;

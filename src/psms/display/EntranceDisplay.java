@@ -1,7 +1,8 @@
 package psms.display;
 
 /**
- * Entrance Display - Shows availability at structure entrance.
+ * Entrance Display (SAD Section 2.3 - Output Device)
+ * Shows real-time availability at the structure entrance (e.g. "FULL", "25 Spaces Available").
  */
 public class EntranceDisplay {
     private String message = "";

@@ -1,7 +1,8 @@
 package psms.display;
 
 /**
- * Floor Display - Shows available spots per floor.
+ * Floor Display (SAD Section 2.3 - Output Device)
+ * Per-floor digital display showing available spot count.
  */
 public class FloorDisplay {
     private int availableCount;

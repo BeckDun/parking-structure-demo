@@ -5,8 +5,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -21,38 +24,47 @@ public class PSMSApplication extends Application {
     private ParkingStructureView parkingView;
     private ControlPanel controlPanel;
     private StatusBar statusBar;
+    private EventLogPanel eventLogPanel;
 
     @Override
     public void start(Stage primaryStage) {
         controller = new MainController();
+        controller.setUiRefreshCallback(this::refreshUI);
 
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(10));
         root.setStyle("-fx-background-color: #2b2b2b;");
 
-        // Top - Title and System State
         HBox topBar = createTopBar();
         root.setTop(topBar);
 
-        // Center - Parking Structure Visualization
+        // Left: Event Log (fills full height)
+        eventLogPanel = new EventLogPanel(controller);
+
+        // Center: Parking view in a scroll pane
         parkingView = new ParkingStructureView(controller);
-        root.setCenter(parkingView);
-        BorderPane.setMargin(parkingView, new Insets(10, 10, 10, 0));
+        ScrollPane parkingScroll = new ScrollPane(parkingView);
+        parkingScroll.setFitToWidth(true);
+        parkingScroll.setStyle("-fx-background: #2b2b2b; -fx-background-color: #2b2b2b; -fx-border-color: transparent;");
+        HBox.setHgrow(parkingScroll, Priority.ALWAYS);
 
-        // Right - Control Panel
+        // Right: Control Panel
         controlPanel = new ControlPanel(controller, this::refreshUI);
-        root.setRight(controlPanel);
-        BorderPane.setMargin(controlPanel, new Insets(10, 0, 10, 10));
 
-        // Bottom - Status Bar
+        HBox centerRow = new HBox(10, eventLogPanel, parkingScroll, controlPanel);
+        centerRow.setPadding(new Insets(10, 0, 10, 0));
+        VBox.setVgrow(centerRow, Priority.ALWAYS);
+
+        root.setCenter(centerRow);
+
         statusBar = new StatusBar(controller);
         root.setBottom(statusBar);
         BorderPane.setMargin(statusBar, new Insets(10, 0, 0, 0));
 
-        Scene scene = new Scene(root, 1000, 700);
+        Scene scene = new Scene(root, 1250, 700);
         primaryStage.setTitle("Parking Structure Management System - Demo");
         primaryStage.setScene(scene);
-        primaryStage.setMinWidth(900);
+        primaryStage.setMinWidth(1100);
         primaryStage.setMinHeight(600);
         primaryStage.show();
 
@@ -76,7 +88,7 @@ public class PSMSApplication extends Application {
         HBox spacer = new HBox();
         spacer.setMinWidth(50);
         spacer.setMaxWidth(Double.MAX_VALUE);
-        javafx.scene.layout.HBox.setHgrow(spacer, javafx.scene.layout.Priority.ALWAYS);
+        HBox.setHgrow(spacer, Priority.ALWAYS);
 
         topBar.getChildren().addAll(titleLabel, spacer, systemStateLabel);
         return topBar;
@@ -97,6 +109,7 @@ public class PSMSApplication extends Application {
         parkingView.refresh();
         controlPanel.refresh();
         statusBar.refresh();
+        eventLogPanel.refresh();
     }
 
     public static void main(String[] args) {

@@ -10,12 +10,14 @@ import javafx.scene.text.FontWeight;
 import psms.model.GateState;
 
 /**
- * Bottom status bar showing gate state and summary statistics.
+ * Bottom status bar showing gate state, in-transit/parked breakdown, and summary.
  */
 public class StatusBar extends HBox {
     private final MainController controller;
     private final Label gateStatusLabel;
     private final Label gateIndicator;
+    private final Label inTransitLabel;
+    private final Label parkedLabel;
     private final Label summaryLabel;
 
     public StatusBar(MainController controller) {
@@ -26,7 +28,6 @@ public class StatusBar extends HBox {
         setAlignment(Pos.CENTER_LEFT);
         setStyle("-fx-background-color: #3c3f41; -fx-background-radius: 5;");
 
-        // Gate Status
         HBox gateBox = new HBox(10);
         gateBox.setAlignment(Pos.CENTER_LEFT);
 
@@ -39,7 +40,6 @@ public class StatusBar extends HBox {
         gateIndicator.setMinHeight(15);
         gateIndicator.setMaxWidth(15);
         gateIndicator.setMaxHeight(15);
-        gateIndicator.setStyle("-fx-background-color: #e06c75; -fx-background-radius: 7;");
 
         gateStatusLabel = new Label("CLOSED");
         gateStatusLabel.setFont(Font.font("System", FontWeight.BOLD, 12));
@@ -47,16 +47,22 @@ public class StatusBar extends HBox {
 
         gateBox.getChildren().addAll(gateLabel, gateIndicator, gateStatusLabel);
 
-        // Spacer
+        inTransitLabel = new Label("In-Transit: 0");
+        inTransitLabel.setFont(Font.font("System", FontWeight.BOLD, 12));
+        inTransitLabel.setStyle("-fx-text-fill: #ffc66d;");
+
+        parkedLabel = new Label("Parked: 0");
+        parkedLabel.setFont(Font.font("System", FontWeight.BOLD, 12));
+        parkedLabel.setStyle("-fx-text-fill: #6aab73;");
+
         HBox spacer = new HBox();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        // Summary
         summaryLabel = new Label();
         summaryLabel.setFont(Font.font("System", 12));
         summaryLabel.setStyle("-fx-text-fill: #888888;");
 
-        getChildren().addAll(gateBox, spacer, summaryLabel);
+        getChildren().addAll(gateBox, inTransitLabel, parkedLabel, spacer, summaryLabel);
         refresh();
     }
 
@@ -88,14 +94,20 @@ public class StatusBar extends HBox {
         gateStatusLabel.setText(stateText);
         gateIndicator.setStyle("-fx-background-color: " + indicatorColor + "; -fx-background-radius: 7;");
 
-        int occupied = controller.getOccupiedSpots();
+        int inTransit = controller.getInTransitCount();
+        int parked = controller.getParkedCount();
         int available = controller.getTotalAvailableSpots();
         int capacity = controller.getTotalCapacity();
 
-        summaryLabel.setText(
-                "Occupied: " + occupied + " | " +
-                "Available: " + available + " | " +
-                "Capacity: " + capacity
-        );
+        inTransitLabel.setText("In-Transit: " + inTransit);
+        parkedLabel.setText("Parked: " + parked);
+
+        if (inTransit > 0) {
+            inTransitLabel.setStyle("-fx-text-fill: #ffc66d; -fx-font-weight: bold;");
+        } else {
+            inTransitLabel.setStyle("-fx-text-fill: #888888;");
+        }
+
+        summaryLabel.setText("Available: " + available + " / " + capacity);
     }
 }

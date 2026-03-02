@@ -1,8 +1,11 @@
 package psms;
 
 /**
- * System Controller - Central coordinator implementing a state machine with four states:
- * STARTUP, NORMAL, AT_CAPACITY, and EMERGENCY.
+ * System Controller (SAD Section 3)
+ * Central coordinator with state machine: STARTUP, NORMAL, AT_CAPACITY, EMERGENCY.
+ *
+ * Variables: SystemState currentState
+ * Methods: transitionState(SystemState), processEvent(Event)
  */
 public class SystemController {
     private SystemState currentState;

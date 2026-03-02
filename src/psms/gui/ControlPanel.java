@@ -22,6 +22,7 @@ public class ControlPanel extends VBox {
     private final Button emergencyButton;
     private final Button resolveButton;
     private final Button resetButton;
+    private final Button fillButton;
 
     private final Label occupiedLabel;
     private final Label availableLabel;
@@ -102,13 +103,19 @@ public class ControlPanel extends VBox {
         systemTitle.setFont(Font.font("System", FontWeight.BOLD, 12));
         systemTitle.setStyle("-fx-text-fill: #888888;");
 
+        fillButton = createButton("Fill All Spots", "#c678dd");
+        fillButton.setOnAction(e -> {
+            controller.fillAllSpots();
+            refreshCallback.run();
+        });
+
         resetButton = createButton("Reset System", "#888888");
         resetButton.setOnAction(e -> {
             controller.resetSystem();
             refreshCallback.run();
         });
 
-        VBox systemBox = new VBox(8, systemTitle, resetButton);
+        VBox systemBox = new VBox(8, systemTitle, fillButton, resetButton);
         systemBox.setPadding(new Insets(10));
         systemBox.setStyle("-fx-background-color: #2b2b2b; -fx-background-radius: 5;");
 
@@ -185,10 +192,12 @@ public class ControlPanel extends VBox {
 
         SystemState state = controller.getSystemState();
         boolean isEmergency = state == SystemState.EMERGENCY;
+        boolean gateInUse = controller.isGateInUse();
 
-        entryButton.setDisable(isEmergency || state == SystemState.AT_CAPACITY);
+        entryButton.setDisable(isEmergency || state == SystemState.AT_CAPACITY || gateInUse);
         exitButton.setDisable(occupied == 0);
         emergencyButton.setDisable(isEmergency);
         resolveButton.setDisable(!isEmergency);
+        fillButton.setDisable(isEmergency || available == 0);
     }
 }

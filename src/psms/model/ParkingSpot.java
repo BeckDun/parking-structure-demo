@@ -5,17 +5,23 @@ package psms.model;
  */
 public class ParkingSpot {
     private final int spotId;
+    private final int floorNumber;
     private final boolean isHandicap;
     private boolean isOccupied;
 
     public ParkingSpot(int spotId, int floorNumber, boolean isHandicap) {
         this.spotId = spotId;
+        this.floorNumber = floorNumber;
         this.isHandicap = isHandicap;
         this.isOccupied = false;
     }
 
     public int getSpotId() {
         return spotId;
+    }
+
+    public int getFloorNumber() {
+        return floorNumber;
     }
 
     public boolean isHandicap() {
