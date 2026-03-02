@@ -100,8 +100,8 @@ public class PSMSApplication extends Application {
 
         String stateColor = switch (state) {
             case STARTUP -> "-fx-text-fill: #ffc66d;";
-            case NORMAL -> "-fx-text-fill: #6aab73;";
-            case AT_CAPACITY -> "-fx-text-fill: #e06c75;";
+            case NORMAL -> "-fx-text-fill: #7CFC00;";
+            case AT_CAPACITY -> "-fx-text-fill: #FF3F3D;";
             case EMERGENCY -> "-fx-text-fill: #ff0000; -fx-font-weight: bold;";
         };
         systemStateLabel.setStyle(stateColor + " -fx-padding: 5 10; -fx-background-color: #4a4a4a; -fx-background-radius: 3;");

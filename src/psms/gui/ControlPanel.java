@@ -61,7 +61,7 @@ public class ControlPanel extends VBox {
         vehicleTitle.setFont(Font.font("System", FontWeight.BOLD, 12));
         vehicleTitle.setStyle("-fx-text-fill: #888888;");
 
-        entryButton = createButton("Vehicle Entry", "#6aab73");
+        entryButton = createButton("Vehicle Entry", "#7CFC00");
         entryButton.setOnAction(e -> {
             controller.simulateVehicleEntry();
             refreshCallback.run();
@@ -82,7 +82,7 @@ public class ControlPanel extends VBox {
         emergencyTitle.setFont(Font.font("System", FontWeight.BOLD, 12));
         emergencyTitle.setStyle("-fx-text-fill: #888888;");
 
-        emergencyButton = createButton("Trigger Emergency", "#e06c75");
+        emergencyButton = createButton("Trigger Emergency", "#FF3F3D");
         emergencyButton.setOnAction(e -> {
             controller.triggerEmergency();
             refreshCallback.run();
@@ -125,9 +125,9 @@ public class ControlPanel extends VBox {
         legendTitle.setStyle("-fx-text-fill: #888888;");
 
         Label greenLegend = createStatLabel("Green = Available");
-        greenLegend.setStyle("-fx-text-fill: #6aab73;");
+        greenLegend.setStyle("-fx-text-fill: #7CFC00;");
         Label redLegend = createStatLabel("Red = Occupied");
-        redLegend.setStyle("-fx-text-fill: #e06c75;");
+        redLegend.setStyle("-fx-text-fill: #FF3F3D;");
         Label blueLegend = createStatLabel("Blue = Handicap Available");
         blueLegend.setStyle("-fx-text-fill: #61afef;");
 

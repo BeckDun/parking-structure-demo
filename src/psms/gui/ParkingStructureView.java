@@ -45,7 +45,7 @@ public class ParkingStructureView extends VBox {
 
         entranceDisplay = new Label();
         entranceDisplay.setFont(Font.font("System", FontWeight.BOLD, 24));
-        entranceDisplay.setStyle("-fx-text-fill: #6aab73;");
+        entranceDisplay.setStyle("-fx-text-fill: #7CFC00;");
 
         entranceBox.getChildren().addAll(entranceTitle, entranceDisplay);
 
@@ -75,11 +75,11 @@ public class ParkingStructureView extends VBox {
 
         Label parkedLabel = new Label("Parked:");
         parkedLabel.setFont(Font.font("System", FontWeight.BOLD, 14));
-        parkedLabel.setStyle("-fx-text-fill: #6aab73;");
+        parkedLabel.setStyle("-fx-text-fill: #7CFC00;");
 
         parkedValue = new Label("0");
         parkedValue.setFont(Font.font("System", FontWeight.BOLD, 20));
-        parkedValue.setStyle("-fx-text-fill: #6aab73;");
+        parkedValue.setStyle("-fx-text-fill: #7CFC00;");
 
         HBox parkedBox = new HBox(8, parkedLabel, parkedValue);
         parkedBox.setAlignment(Pos.CENTER);
@@ -104,9 +104,9 @@ public class ParkingStructureView extends VBox {
         entranceDisplay.setText(message);
 
         if (message.contains("FULL") || message.contains("EMERGENCY")) {
-            entranceDisplay.setStyle("-fx-text-fill: #e06c75;");
+            entranceDisplay.setStyle("-fx-text-fill: #FF3F3D;");
         } else {
-            entranceDisplay.setStyle("-fx-text-fill: #6aab73;");
+            entranceDisplay.setStyle("-fx-text-fill: #7CFC00;");
         }
 
         int inTransit = controller.getInTransitCount();

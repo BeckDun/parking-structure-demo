@@ -53,7 +53,7 @@ public class StatusBar extends HBox {
 
         parkedLabel = new Label("Parked: 0");
         parkedLabel.setFont(Font.font("System", FontWeight.BOLD, 12));
-        parkedLabel.setStyle("-fx-text-fill: #6aab73;");
+        parkedLabel.setStyle("-fx-text-fill: #7CFC00;");
 
         HBox spacer = new HBox();
         HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -75,11 +75,11 @@ public class StatusBar extends HBox {
         switch (gateState) {
             case OPEN -> {
                 stateText = "OPEN";
-                indicatorColor = "#6aab73";
+                indicatorColor = "#7CFC00";
             }
             case CLOSED -> {
                 stateText = "CLOSED";
-                indicatorColor = "#e06c75";
+                indicatorColor = "#FF3F3D";
             }
             case LOCKED -> {
                 stateText = "LOCKED";

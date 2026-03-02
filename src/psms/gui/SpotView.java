@@ -41,8 +41,8 @@ public class SpotView extends StackPane {
     public void refresh() {
         SpotStatus status = spot.getStatus();
         Color color = switch (status) {
-            case AVAILABLE -> Color.web("#6aab73");
-            case OCCUPIED -> Color.web("#e06c75");
+            case AVAILABLE -> Color.web("#7CFC00");
+            case OCCUPIED -> Color.web("#FF3F3D");
             case HANDICAP_AVAILABLE -> Color.web("#61afef");
         };
         rectangle.setFill(color);
