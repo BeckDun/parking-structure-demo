@@ -1,23 +1,12 @@
 package psms.sensors;
 
-import psms.SensorInterface;
-
 /**
- * Binary Spot Sensor (SAD Section 2.3 - External Input)
+ * Binary Spot Sensor (SAD Section 2.3 - External Input Device)
  * Reports occupied/vacant state for a parking spot.
+ * Raw signal is read by Sensor Driver and forwarded to Sensor Interface.
  */
-public class SpotSensor implements SensorInterface {
+public class SpotSensor {
     private boolean isOccupied;
-
-    @Override
-    public String normalizeSignal() {
-        return isOccupied ? "SPOT_OCCUPIED" : "SPOT_VACANT";
-    }
-
-    @Override
-    public void routeToController() {
-        // Routes normalized event to System Controller
-    }
 
     public boolean isOccupied() {
         return isOccupied;

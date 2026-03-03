@@ -3,7 +3,8 @@ package psms;
 /**
  * Emergency Handler (SAD Section 3)
  * Monitors Power Status Monitor and Manual Override Switch inputs.
- * Signals the System Controller to transition to Emergency/Fail-Safe state.
+ * Signals the System Controller to transition to Emergency/Fail-Safe state
+ * via processEvent(), keeping all state transitions centralized.
  *
  * Variables: boolean powerFailure, boolean manualOverride
  * Methods: monitorInputs(), triggerEmergency(), resolveEmergency()
@@ -26,13 +27,13 @@ public class EmergencyHandler {
     }
 
     public void triggerEmergency() {
-        systemController.transitionState(SystemState.EMERGENCY);
+        systemController.processEvent("EMERGENCY_TRIGGER");
     }
 
     public void resolveEmergency() {
         this.powerFailure = false;
         this.manualOverride = false;
-        systemController.transitionState(SystemState.STARTUP);
+        systemController.processEvent("EMERGENCY_RESOLVE");
     }
 
     public void setPowerFailure(boolean failure) {

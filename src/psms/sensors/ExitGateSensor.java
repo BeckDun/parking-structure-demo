@@ -1,30 +1,12 @@
 package psms.sensors;
 
-import psms.SensorInterface;
-
 /**
- * Exit Gate Sensor (SAD Section 3)
+ * Exit Gate Sensor (SAD Section 2.3 - External Input Device)
  * Detects vehicles leaving the structure and reports departures.
- *
- * Variables: boolean vehicleDetected
- * Methods: reportDeparture()
+ * Raw signal is read by Sensor Driver and forwarded to Sensor Interface.
  */
-public class ExitGateSensor implements SensorInterface {
+public class ExitGateSensor {
     private boolean vehicleDetected;
-
-    @Override
-    public String normalizeSignal() {
-        return vehicleDetected ? "VEHICLE_EXIT" : "NO_VEHICLE";
-    }
-
-    @Override
-    public void routeToController() {
-        // Routes normalized event to System Controller
-    }
-
-    public void reportDeparture() {
-        this.vehicleDetected = false;
-    }
 
     public boolean isVehicleDetected() {
         return vehicleDetected;

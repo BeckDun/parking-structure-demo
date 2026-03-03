@@ -1,23 +1,12 @@
 package psms.sensors;
 
-import psms.SensorInterface;
-
 /**
- * Manual Override Switch (SAD Section 2.3 - External Input)
+ * Manual Override Switch (SAD Section 2.3 - External Input Device)
  * Administrative control for placing structure into emergency mode.
+ * Raw signal is read by Sensor Driver and forwarded to Sensor Interface.
  */
-public class ManualOverrideSwitch implements SensorInterface {
+public class ManualOverrideSwitch {
     private boolean activated;
-
-    @Override
-    public String normalizeSignal() {
-        return activated ? "OVERRIDE_ACTIVE" : "OVERRIDE_INACTIVE";
-    }
-
-    @Override
-    public void routeToController() {
-        // Routes normalized event to System Controller
-    }
 
     public boolean isActivated() {
         return activated;

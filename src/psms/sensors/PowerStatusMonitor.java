@@ -1,23 +1,12 @@
 package psms.sensors;
 
-import psms.SensorInterface;
-
 /**
- * Power Status Monitor (SAD Section 2.3 - External Input)
+ * Power Status Monitor (SAD Section 2.3 - External Input Device)
  * Detects power failures and reports to Emergency Handler.
+ * Raw signal is read by Sensor Driver and forwarded to Sensor Interface.
  */
-public class PowerStatusMonitor implements SensorInterface {
+public class PowerStatusMonitor {
     private boolean powerAvailable = true;
-
-    @Override
-    public String normalizeSignal() {
-        return powerAvailable ? "POWER_OK" : "POWER_FAILURE";
-    }
-
-    @Override
-    public void routeToController() {
-        // Routes normalized event to System Controller
-    }
 
     public boolean isPowerAvailable() {
         return powerAvailable;
