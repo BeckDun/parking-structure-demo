@@ -1,4 +1,9 @@
 # parking-structure-demo
-Parking Structure Management System Demo
+Use adi-psms branch to run demo
 
-Diddy, R Kelly, MJ, Beckett, Adi
+## Team T01
+- Beckett Dunlavy (Manager)
+- Oscar McCoy
+- Christian Maestas
+- Aditya Chauhan
+- Isaac Tapia
